@@ -18,21 +18,67 @@ class PokeSearchViewController: UIViewController {
     @IBOutlet weak var abilitiesLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     
-    
-    
     // MARK: - Properties
-    
+    var pokemonName: String?
+    var apiController: APIController?
     
     
     // MARK: - View
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        getDetails()
     }
     
+    func updateViews(with pokemon: Pokemon) {
+        nameLabel.text = pokemon.name
+        idLabel.text = "\(pokemon.id)"
+        typesLabel.text = "\(pokemon.types)"
+        abilitiesLabel.text = "\(pokemon.abilities)"
+    }
+    
+    func getDetails() {
+        guard let apiController = apiController,
+                let pokemonName = pokemonName else {
+                    print("PokeSearchViewController: API Controller and pokemon name are required dependencies.")
+                    return
+            }
+            
+        apiController.fetchPokemon(pokemonName: pokemonName) { result in
+                do {
+                    let pokemon = try result.get()
+                    DispatchQueue.main.async {
+                        self.updateViews(with: pokemon)
+                    }
+                    
+                    apiController.fetchImage(at: pokemon.sprites.frontDefault) { result in
+                        if let image = try? result.get() {
+                            DispatchQueue.main.async {
+                                self.imageView.image = image
+                            }
+                        }
+                    }
+                } catch {
+                    if let error = error as? NetworkError {
+                        switch error {
+                        case .noAuth:
+                            print("Unecessary attempt at authorization.")
+                        case .badAuth:
+                            print("Unecessary attempt at authorization.")
+                        case .otherError:
+                            print("Other error occurred, see log")
+                        case .badData:
+                            print("No data received, or data corrupted")
+                        case .noDecode:
+                            print("JSON could not be decoded")
+                        }
+                    }
+                }
+            }
+        }
+
+    
     // MARK: - Actions
-    @IBAction func saveTapper(_ sender: UIButton) {
+    @IBAction func saveTapped(_ sender: UIButton) {
     }
     
 }
