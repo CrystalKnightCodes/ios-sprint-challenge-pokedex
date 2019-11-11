@@ -84,5 +84,13 @@ class PokeSearchViewController: UIViewController {
 }
 
 extension PokeSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchTerm = searchBar.text else { return }
         
+        apiController?.fetchPokemon(pokemonName: searchTerm, completion: { (pokemon) in
+            DispatchQueue.main.async {
+                self.getDetails()
+            }
+        })
+    }
 }
