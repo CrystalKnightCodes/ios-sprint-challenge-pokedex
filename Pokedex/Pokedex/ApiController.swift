@@ -26,12 +26,9 @@ class APIController {
     
     private let baseUrl = URL(string: "https://pokeapi.co/api/v2")!
     
-    // create function for fetching a pokemon
-    
-    func fetchPokemon(pokemonName: String, completion: @escaping (Result<Pokemon, NetworkError>) -> Void) {
-         // Need to add search name?
-        let pokemonURL = baseUrl.appendingPathComponent("pokemon/\(pokemonName)")
-        
+    func fetchPokemon(name: String, completion: @escaping (Result<Pokemon, NetworkError>) -> Void) {
+
+        let pokemonURL = baseUrl.appendingPathComponent("pokemon/\(name)")
         
         var request = URLRequest(url: pokemonURL)
         request.httpMethod = HTTPMethod.get.rawValue
@@ -51,8 +48,8 @@ class APIController {
             
             let decoder = JSONDecoder()
             do {
-                let pokemonName = try decoder.decode(Pokemon.self, from: data)
-                completion(.success(pokemonName))
+                let pokemon = try decoder.decode(Pokemon.self, from: data)
+                completion(.success(pokemon))
                 
             } catch {
                 print("Error decoding pokemon objects: \(error)")

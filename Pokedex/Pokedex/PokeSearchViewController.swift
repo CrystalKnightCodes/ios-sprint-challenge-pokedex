@@ -19,7 +19,11 @@ class PokeSearchViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     // MARK: - Properties
-    var pokemonName: String?
+    var pokemon: Pokemon? {
+        didSet {
+            getDetails()
+        }
+    }
     var apiController: APIController?
     
     
@@ -38,12 +42,12 @@ class PokeSearchViewController: UIViewController {
     
     func getDetails() {
         guard let apiController = apiController,
-                let pokemonName = pokemonName else {
+            let pokemonName = pokemon?.name else {
                     print("PokeSearchViewController: API Controller and pokemon name are required dependencies.")
                     return
             }
             
-        apiController.fetchPokemon(pokemonName: pokemonName) { result in
+        apiController.fetchPokemon(name: pokemonName) { result in
                 do {
                     let pokemon = try result.get()
                     DispatchQueue.main.async {
@@ -79,6 +83,7 @@ class PokeSearchViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func saveTapped(_ sender: UIButton) {
+        
     }
     
 }
@@ -87,7 +92,7 @@ extension PokeSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         
-        apiController?.fetchPokemon(pokemonName: searchTerm, completion: { (pokemon) in
+        apiController?.fetchPokemon(name: searchTerm, completion: { (pokemon) in
             DispatchQueue.main.async {
                 self.getDetails()
             }
