@@ -25,9 +25,7 @@ class PokeSearchViewController: UIViewController {
         }
     }
     
-   // var pokemonList: [Pokemon]?
     var apiController: APIController?
-    
     
     // MARK: - View
     override func viewDidLoad() {
@@ -113,18 +111,16 @@ class PokeSearchViewController: UIViewController {
         apiController?.pokemonList.append(pokemon)
         navigationController?.popViewController(animated: true)
     }
-    
 }
 
+    // MARK: - Search Bar Delegate
 extension PokeSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         
-        
         apiController?.fetchPokemon(name: searchTerm, completion: { (pokemon) in
             if let pokemonResult = try? pokemon.get() {
                 self.pokemon = pokemonResult
-                
                 
                 DispatchQueue.main.async {
                     self.getDetails()
