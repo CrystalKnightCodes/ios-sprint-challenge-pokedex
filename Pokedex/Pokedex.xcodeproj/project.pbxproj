@@ -12,6 +12,10 @@
 		BA23F2A82378D5B6001AD26C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA23F2A62378D5B6001AD26C /* Main.storyboard */; };
 		BA23F2AA2378D5B6001AD26C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA23F2A92378D5B6001AD26C /* Assets.xcassets */; };
 		BA23F2AD2378D5B6001AD26C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA23F2AB2378D5B6001AD26C /* LaunchScreen.storyboard */; };
+		BA23F2B52378DE4B001AD26C /* PokeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA23F2B42378DE4B001AD26C /* PokeSearchViewController.swift */; };
+		BA23F2B72378DE6D001AD26C /* PokedexTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA23F2B62378DE6D001AD26C /* PokedexTableViewController.swift */; };
+		BA23F2BA2378DE96001AD26C /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA23F2B92378DE96001AD26C /* Pokemon.swift */; };
+		BA23F2BD2378DEB9001AD26C /* ApiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA23F2BC2378DEB9001AD26C /* ApiController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		BA23F2A92378D5B6001AD26C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA23F2AC2378D5B6001AD26C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA23F2AE2378D5B6001AD26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA23F2B42378DE4B001AD26C /* PokeSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeSearchViewController.swift; sourceTree = "<group>"; };
+		BA23F2B62378DE6D001AD26C /* PokedexTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexTableViewController.swift; sourceTree = "<group>"; };
+		BA23F2B92378DE96001AD26C /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
+		BA23F2BC2378DEB9001AD26C /* ApiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +65,39 @@
 				BA23F2A02378D5B6001AD26C /* AppDelegate.swift */,
 				BA23F2A22378D5B6001AD26C /* SceneDelegate.swift */,
 				BA23F2A62378D5B6001AD26C /* Main.storyboard */,
+				BA23F2BE2378DEC0001AD26C /* Controllers */,
+				BA23F2BB2378DE9D001AD26C /* Model */,
+				BA23F2B82378DE76001AD26C /* View Controllers */,
 				BA23F2A92378D5B6001AD26C /* Assets.xcassets */,
 				BA23F2AB2378D5B6001AD26C /* LaunchScreen.storyboard */,
 				BA23F2AE2378D5B6001AD26C /* Info.plist */,
 			);
 			path = Pokedex;
+			sourceTree = "<group>";
+		};
+		BA23F2B82378DE76001AD26C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA23F2B62378DE6D001AD26C /* PokedexTableViewController.swift */,
+				BA23F2B42378DE4B001AD26C /* PokeSearchViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BA23F2BB2378DE9D001AD26C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA23F2B92378DE96001AD26C /* Pokemon.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		BA23F2BE2378DEC0001AD26C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BA23F2BC2378DEB9001AD26C /* ApiController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +171,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA23F2BA2378DE96001AD26C /* Pokemon.swift in Sources */,
+				BA23F2B72378DE6D001AD26C /* PokedexTableViewController.swift in Sources */,
+				BA23F2BD2378DEB9001AD26C /* ApiController.swift in Sources */,
 				BA23F2A12378D5B6001AD26C /* AppDelegate.swift in Sources */,
+				BA23F2B52378DE4B001AD26C /* PokeSearchViewController.swift in Sources */,
 				BA23F2A32378D5B6001AD26C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
