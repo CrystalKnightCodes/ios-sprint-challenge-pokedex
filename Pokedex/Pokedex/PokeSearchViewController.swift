@@ -36,11 +36,34 @@ class PokeSearchViewController: UIViewController {
         getDetails()
     }
     
-    func updateViews(with pokemon: Pokemon) {
+    func updateViews() {
+        guard let pokemon = pokemon else {
+            idLabel.isHidden = true
+            typesLabel.isHidden = true
+            abilitiesLabel.isHidden = true
+            saveButton.isHidden = true
+            return
+        }
+        idLabel.isHidden = false
+        typesLabel.isHidden = false
+        abilitiesLabel.isHidden = false
+        saveButton.isHidden = false
+        
+        var typesString = ""
+        var abilitiesString = ""
+        
+        for types in pokemon.types {
+            typesString += " \(types.type.name),"
+        }
+        
+        for abilities in pokemon.abilities {
+            abilitiesString += " \(abilities.ability.name),"
+        }
+        
         nameLabel.text = pokemon.name
         idLabel.text = "\(pokemon.id)"
-        typesLabel.text = String(describing: pokemon.types.first!.type.name)
-        abilitiesLabel.text = String(describing: pokemon.abilities.first!.ability.name)
+        typesLabel.text = typesString
+        abilitiesLabel.text = abilitiesString
     }
     
     func getDetails() {
@@ -54,7 +77,7 @@ class PokeSearchViewController: UIViewController {
                 do {
                     let pokemon = try result.get()
                     DispatchQueue.main.async {
-                        self.updateViews(with: pokemon)
+                        self.updateViews()
                     }
                     
                     apiController.fetchImage(at: pokemon.sprites.frontDefault) { result in
