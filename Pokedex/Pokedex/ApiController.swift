@@ -23,12 +23,16 @@ enum NetworkError: Error {
 }
 
 class APIController {
+    // MARK: - Properties
+    private let baseUrl = URL(string: "https://pokeapi.co/api/v2/")!
+    var pokemonList: [Pokemon] = []
+    var pokemon: Pokemon?
+   
     
-    private let baseUrl = URL(string: "https://pokeapi.co/api/v2")!
-    
+    // MARK: - Methods
     func fetchPokemon(name: String, completion: @escaping (Result<Pokemon, NetworkError>) -> Void) {
 
-        let pokemonURL = baseUrl.appendingPathComponent("pokemon/\(name)")
+        let pokemonURL = baseUrl.appendingPathComponent("pokemon/\(name.lowercased())")
         
         var request = URLRequest(url: pokemonURL)
         request.httpMethod = HTTPMethod.get.rawValue
@@ -47,6 +51,7 @@ class APIController {
             }
             
             let decoder = JSONDecoder()
+            
             do {
                 let pokemon = try decoder.decode(Pokemon.self, from: data)
                 completion(.success(pokemon))
@@ -59,7 +64,6 @@ class APIController {
         
     }
     
-    // create function to fetch image
     func fetchImage(at urlString: String, completion: @escaping (Result<UIImage, NetworkError>) -> Void) {
         let imageUrl = URL(string: urlString)!
         

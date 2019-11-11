@@ -129,8 +129,7 @@
                                 <rect key="frame" x="156.5" y="706.5" width="101" height="30"/>
                                 <state key="normal" title="Save Pokemon"/>
                                 <connections>
-                                    <action selector="saveTapped:" destination="qIw-F5-fgg" eventType="touchUpInside" id="Bwy-2x-xl0"/>
-                                    <action selector="saveTapper:" destination="qIw-F5-fgg" eventType="touchUpInside" id="leF-Mo-QwB"/>
+                                    <action selector="saveTapped:" destination="qIw-F5-fgg" eventType="touchUpInside" id="Mks-DE-BZW"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="e87-bt-pbf">
@@ -204,6 +203,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xXQ-gF-VLb"/>
+        <segue reference="oue-lY-Ei8"/>
     </inferredMetricsTieBreakers>
 </document>

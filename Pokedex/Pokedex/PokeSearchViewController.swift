@@ -24,20 +24,23 @@ class PokeSearchViewController: UIViewController {
             getDetails()
         }
     }
+    
+   // var pokemonList: [Pokemon]?
     var apiController: APIController?
     
     
     // MARK: - View
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchBar.delegate = self
         getDetails()
     }
     
     func updateViews(with pokemon: Pokemon) {
         nameLabel.text = pokemon.name
         idLabel.text = "\(pokemon.id)"
-        typesLabel.text = "\(pokemon.types)"
-        abilitiesLabel.text = "\(pokemon.abilities)"
+        typesLabel.text = String(describing: pokemon.types.first!.type.name)
+        abilitiesLabel.text = String(describing: pokemon.abilities.first!.ability.name)
     }
     
     func getDetails() {
@@ -83,7 +86,9 @@ class PokeSearchViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func saveTapped(_ sender: UIButton) {
-        
+        guard let pokemon = pokemon else { return }
+        apiController?.pokemonList.append(pokemon)
+        navigationController?.popViewController(animated: true)
     }
     
 }
@@ -92,9 +97,15 @@ extension PokeSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text else { return }
         
+        
         apiController?.fetchPokemon(name: searchTerm, completion: { (pokemon) in
-            DispatchQueue.main.async {
-                self.getDetails()
+            if let pokemonResult = try? pokemon.get() {
+                self.pokemon = pokemonResult
+                
+                
+                DispatchQueue.main.async {
+                    self.getDetails()
+                }
             }
         })
     }
